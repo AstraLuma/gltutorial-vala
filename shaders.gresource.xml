@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/astro73/Spacers">
+    <file compressed="true">vertex.glsl</file>
+    <file compressed="true">fragment.glsl</file>
+  </gresource>
+</gresources>

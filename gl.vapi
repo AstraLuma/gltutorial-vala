@@ -11149,7 +11149,7 @@ namespace GL {
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetSeparableFilterEXT")]
 	public static void glGetSeparableFilterEXT (GL.GLenum target, GL.GLenum format, GL.GLenum type, [CCode (array_length = false)] GL.GLvoid[] row, [CCode (array_length = false)] GL.GLvoid[] column, [CCode (array_length = false)] GL.GLvoid[] span);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetShaderInfoLog")]
-	public static void glGetShaderInfoLog (GL.GLuint shader, GL.GLsizei bufSize, [CCode (array_length = false)] GL.GLsizei[] length, [CCode (array_length = false)] GL.GLubyte[] infoLog);
+	public static void glGetShaderInfoLog (GL.GLuint shader, GL.GLsizei bufSize, [CCode (array_length = false)] GL.GLsizei[]? length, [CCode (array_length = false)] GL.GLubyte[] infoLog);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetShaderPrecisionFormat")]
 	public static void glGetShaderPrecisionFormat (GL.GLenum shadertype, GL.GLenum precisiontype, [CCode (array_length = false)] GL.GLint[] range, [CCode (array_length = false)] GL.GLint[] precision);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetShaderSource")]

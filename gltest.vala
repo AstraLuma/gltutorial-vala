@@ -43,7 +43,32 @@ class AppWindow : Gtk.Window {
 		// Give our vertices to OpenGL.
 		glBufferData(GL_ARRAY_BUFFER, sizeof__g_vertex_buffer_data, (GLvoid[]?)g_vertex_buffer_data, GL_STATIC_DRAW);
 
+		load_shaders("/com/astro73/Spacers/vertex.glsl", "/com/astro73/Spacers/fragment.glsl");
+
 		first = false;
+	}
+
+	private void load_shaders(string vertex_name, string fragment_name) throws GLib.Error {
+		GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+		GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+
+		string[] vtxshader = {(string)(Shaders.get_resource().lookup_data(vertex_name, ResourceLookupFlags.NONE))};
+		string[] frgshader = {(string)(Shaders.get_resour`ce().lookup_data(vertex_name, ResourceLookupFlags.NONE))};
+
+		stdout.printf("Compiling shader : %s\n", vertex_name);
+		glShaderSource(VertexShaderID, 1, vtxshader, null);
+		glCompileShader(VertexShaderID);
+
+		GLint[] Result = {GL_FALSE};
+		int[] InfoLogLength = {0};
+		glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, Result);
+		glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, InfoLogLength);
+		if ( InfoLogLength[0] > 0 ){
+			ByteArray VertexShaderErrorMessage = new ByteArray.sized(InfoLogLength[0]+1);
+			glGetShaderInfoLog(VertexShaderID, InfoLogLength[0], null, VertexShaderErrorMessage.data);
+			stderr.printf("%s\n", (string)VertexShaderErrorMessage.data);
+		}
+
 	}
 
 	private bool renderframe(GLContext ctx) {
