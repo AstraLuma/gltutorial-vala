@@ -3,8 +3,8 @@ Bytes get_bytes() {
 }
 
 void double_free() {
-	string[] vtxshader = {(string)(get_bytes())};
-	string[] frgshader = {(string)(get_bytes())};
+	string vtxshader = (string)get_bytes();
+	string frgshader = (string)get_bytes();
 }
 
 public static int main (string[] args) {
