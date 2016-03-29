@@ -1,4 +1,4 @@
-EXTRAFLAGS=$(addprefix --Xcc=,$(shell pkg-config --cflags --libs glew) shaders.c -I$(CURDIR))
+EXTRAFLAGS=$(addprefix --Xcc=,$(shell pkg-config --cflags --libs glew) shaders.c -I$(CURDIR)) --save-temps --verbose
 VALALIBS=--vapidir=. --pkg=gtk+-3.0 --pkg=gl --pkg=glew --pkg=gio-2.0 --pkg=resource
 
 gltest : *.vala gl.vapi shaders.c shaders.h

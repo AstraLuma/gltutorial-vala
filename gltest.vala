@@ -53,21 +53,7 @@ class AppWindow : Gtk.Window {
 		GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
 		string[] vtxshader = {(string)(Shaders.get_resource().lookup_data(vertex_name, ResourceLookupFlags.NONE))};
-		string[] frgshader = {(string)(Shaders.get_resour`ce().lookup_data(vertex_name, ResourceLookupFlags.NONE))};
-
-		stdout.printf("Compiling shader : %s\n", vertex_name);
-		glShaderSource(VertexShaderID, 1, vtxshader, null);
-		glCompileShader(VertexShaderID);
-
-		GLint[] Result = {GL_FALSE};
-		int[] InfoLogLength = {0};
-		glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, Result);
-		glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, InfoLogLength);
-		if ( InfoLogLength[0] > 0 ){
-			ByteArray VertexShaderErrorMessage = new ByteArray.sized(InfoLogLength[0]+1);
-			glGetShaderInfoLog(VertexShaderID, InfoLogLength[0], null, VertexShaderErrorMessage.data);
-			stderr.printf("%s\n", (string)VertexShaderErrorMessage.data);
-		}
+		string[] frgshader = {(string)(Shaders.get_resource().lookup_data(vertex_name, ResourceLookupFlags.NONE))};
 
 	}
 
