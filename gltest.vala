@@ -94,11 +94,15 @@ class AppWindow : Gtk.Window {
 		int[] InfoLogLength = {-1};
 		glGetProgramiv(ProgramID, GL_LINK_STATUS, Results);
 		glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, InfoLogLength);
-		if ( InfoLogLength[0] > 0 ){
-			ByteArray infobuf = new ByteArray.sized(InfoLogLength[0]+1);
-			glGetProgramInfoLog(ProgramID, InfoLogLength[0], null, infobuf.data);
-			string infolog = (string)infobuf.data;
-			stderr.printf("Error: %s\n", infolog);
+		stderr.printf("Link: %i %i\n", Results[0], InfoLogLength[0]);
+		if (Results[0] != GL_TRUE) {
+			string infolog = "";
+			if ( InfoLogLength[0] > 0 ){
+				ByteArray infobuf = new ByteArray.sized(InfoLogLength[0]+1);
+				glGetProgramInfoLog(ProgramID, InfoLogLength[0], null, infobuf.data);
+				infolog = (string)infobuf.data;
+				stderr.printf("Error: %s\n", infolog);
+			}
 			throw new GLCompileError.PROGRAM(infolog);
 		}
 
@@ -143,6 +147,9 @@ class AppWindow : Gtk.Window {
 
 		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		if (programID == -1) return false;
+
 		glUseProgram(programID);
 
 		// 1st attribute buffer : vertices
