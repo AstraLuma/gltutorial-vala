@@ -2,6 +2,19 @@ using Gtk;
 using GL;
 using Gdk;
 
+string readstream(InputStream data) throws GLib.IOError {
+	var dis = new DataInputStream(data);
+	var sb = new StringBuilder();
+
+	string line;
+	while ((line = dis.read_line()) != null) {
+		sb.append(line);
+		sb.append("\n");
+	}
+
+	return sb.str;
+}
+
 errordomain GLCompileError {
 	SHADER,
 	PROGRAM
@@ -34,28 +47,34 @@ class AppWindow : Gtk.Window {
 	private GLuint vertexarray = -1;
 	private GLuint vertexbuffer = -1;
 
+	private GLuint programID = -1;
+
 	private void init_render() {
-		glewExperimental = GL_TRUE; 
-		glewInit();
+		try {
+			glewExperimental = GL_TRUE; 
+			glewInit();
 
-		GLuint[1] vtxary = {vertexarray};
-		GLuint[1] vtxbuf = {vertexbuffer};
+			GLuint[1] vtxary = {vertexarray};
+			GLuint[1] vtxbuf = {vertexbuffer};
 
-		glGenVertexArrays(1, vtxary);
-		vertexarray = vtxary[0];
-		glBindVertexArray(vertexarray);
+			glGenVertexArrays(1, vtxary);
+			vertexarray = vtxary[0];
+			glBindVertexArray(vertexarray);
 
-		
-		// Generate 1 buffer, put the resulting identifier in vtxbuf
-		glGenBuffers(1, vtxbuf);
-		vertexbuffer = vtxbuf[0];
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		// Give our vertices to OpenGL.
-		glBufferData(GL_ARRAY_BUFFER, sizeof__g_vertex_buffer_data, (GLvoid[]?)g_vertex_buffer_data, GL_STATIC_DRAW);
+			
+			// Generate 1 buffer, put the resulting identifier in vtxbuf
+			glGenBuffers(1, vtxbuf);
+			vertexbuffer = vtxbuf[0];
+			glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+			// Give our vertices to OpenGL.
+			glBufferData(GL_ARRAY_BUFFER, sizeof__g_vertex_buffer_data, (GLvoid[]?)g_vertex_buffer_data, GL_STATIC_DRAW);
 
-		load_shaders("/com/astro73/Spacers/vertex.glsl", "/com/astro73/Spacers/fragment.glsl");
+			programID = load_shaders("/com/astro73/Spacers/vertex.glsl", "/com/astro73/Spacers/fragment.glsl");
 
-		first = false;
+			stdout.printf("Finished init\n");
+		} finally {
+			first = false;
+		}
 	}
 
 	private GLuint load_shaders(string vertex_name, string fragment_name) throws GLib.Error, GLCompileError {
@@ -97,13 +116,15 @@ class AppWindow : Gtk.Window {
 
 		Resource r = Shaders.get_resource();
 
-		string[] vtxshader = {(string)(r.lookup_data(resource, ResourceLookupFlags.NONE).get_data())};
+		string shadersource = readstream(r.open_stream(resource, ResourceLookupFlags.NONE));
+		glShaderSource(shid, 1, {shadersource}, null);
+		glCompileShader(shid);
 
 		GLint[] Results = {-1};
 		int[] InfoLogLength = {-1};
 		glGetShaderiv(shid, GL_COMPILE_STATUS, Results);
 		glGetShaderiv(shid, GL_INFO_LOG_LENGTH, InfoLogLength);
-		stderr.printf("%i %i\n", Results[0], InfoLogLength[0]);
+		stdout.printf("%i %i\n", Results[0], InfoLogLength[0]);
 		if (Results[0] != GL_TRUE) {
 			string infolog = "";
 			if ( InfoLogLength[0] > 0 ){
@@ -120,7 +141,11 @@ class AppWindow : Gtk.Window {
 	private bool renderframe(GLContext ctx) {
 		if (first) init_render();
 
-		// 1rst attribute buffer : vertices
+		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(programID);
+
+		// 1st attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(
