@@ -11063,7 +11063,7 @@ namespace GL {
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetProgramEnvParameterfvARB")]
 	public static void glGetProgramEnvParameterfvARB (GL.GLenum target, GL.GLuint index, [CCode (array_length = false)] GL.GLfloat[] @params);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetProgramInfoLog")]
-	public static void glGetProgramInfoLog (GL.GLuint program, GL.GLsizei bufSize, [CCode (array_length = false)] GL.GLsizei[] length, [CCode (array_length = false)] GL.GLubyte[] infoLog);
+	public static void glGetProgramInfoLog (GL.GLuint program, GL.GLsizei bufSize, [CCode (array_length = false)] GL.GLsizei[]? length, [CCode (array_length = false)] GL.GLubyte[] infoLog);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetProgramInterfaceiv")]
 	public static void glGetProgramInterfaceiv (GL.GLuint program, GL.GLenum programInterface, GL.GLenum pname, [CCode (array_length = false)] GL.GLint[] @params);
 	[CCode (cheader_filename = "GL/glew.h", cname = "glGetProgramLocalParameterIivNV")]

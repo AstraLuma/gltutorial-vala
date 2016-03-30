@@ -12,4 +12,4 @@ gltest : *.vala gl.vapi shaders.c shaders.h
 
 .PHONY : clean
 clean :
-	rm -f gltest shaders.c shaders.h
+	git clean -xf
