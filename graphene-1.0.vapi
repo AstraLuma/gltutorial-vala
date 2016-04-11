@@ -2,7 +2,7 @@
 
 [CCode (cprefix = "Graphene", gir_namespace = "Graphene", gir_version = "1.0", lower_case_cprefix = "graphene_")]
 namespace Graphene {
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_box_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_box_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_box_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_box_get_type ()")]
 	[Compact]
 	public class Box {
 		[CCode (cname = "graphene_box_alloc", has_construct_function = false)]
@@ -37,7 +37,7 @@ namespace Graphene {
 		public void union (Graphene.Box b, out unowned Graphene.Box res);
 		public static unowned Graphene.Box zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_euler_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_euler_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_euler_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_euler_get_type ()")]
 	[Compact]
 	public class Euler {
 		[CCode (cname = "graphene_euler_alloc", has_construct_function = false)]
@@ -58,7 +58,7 @@ namespace Graphene {
 		public void to_matrix (out unowned Graphene.Matrix res);
 		public void to_vec3 (out unowned Graphene.Vec3 res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_frustum_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_frustum_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_frustum_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_frustum_get_type ()")]
 	[Compact]
 	public class Frustum {
 		[CCode (cname = "graphene_frustum_alloc", has_construct_function = false)]
@@ -72,7 +72,7 @@ namespace Graphene {
 		public bool intersects_box (Graphene.Box box);
 		public bool intersects_sphere (Graphene.Sphere sphere);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_matrix_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_matrix_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_matrix_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_matrix_get_type ()")]
 	[Compact]
 	public class Matrix {
 		[CCode (cname = "graphene_matrix_alloc", has_construct_function = false)]
@@ -158,7 +158,7 @@ namespace Graphene {
 		public void untransform_bounds (Graphene.Rect r, Graphene.Rect bounds, out unowned Graphene.Rect res);
 		public bool untransform_point (Graphene.Point p, Graphene.Rect bounds, out unowned Graphene.Point res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_plane_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_plane_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_plane_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_plane_get_type ()")]
 	[Compact]
 	public class Plane {
 		[CCode (cname = "graphene_plane_alloc", has_construct_function = false)]
@@ -176,7 +176,7 @@ namespace Graphene {
 		public void negate (out unowned Graphene.Plane res);
 		public void normalize (out unowned Graphene.Plane res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_point_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_point_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_point_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_point_get_type ()")]
 	[Compact]
 	public class Point {
 		public float x;
@@ -194,7 +194,7 @@ namespace Graphene {
 		public void to_vec2 (out unowned Graphene.Vec2 v);
 		public static unowned Graphene.Point zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_point3d_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", lower_case_csuffix = "point3d", type_id = "graphene_point3d_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_point3d_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", lower_case_csuffix = "point3d", type_id = "graphene_point3d_get_type ()")]
 	[Compact]
 	public class Point3D {
 		public float x;
@@ -219,7 +219,7 @@ namespace Graphene {
 		public void to_vec3 (out unowned Graphene.Vec3 v);
 		public static unowned Graphene.Point3D zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_quad_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_quad_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_quad_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_quad_get_type ()")]
 	[Compact]
 	public class Quad {
 		[CCode (cname = "graphene_quad_alloc", has_construct_function = false)]
@@ -232,7 +232,7 @@ namespace Graphene {
 		public unowned Graphene.Quad init_from_points ([CCode (array_length = false)] Graphene.Point[] points);
 		public unowned Graphene.Quad init_from_rect (Graphene.Rect r);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_quaternion_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_quaternion_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_quaternion_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_quaternion_get_type ()")]
 	[Compact]
 	public class Quaternion {
 		[CCode (cname = "graphene_quaternion_alloc", has_construct_function = false)]
@@ -256,7 +256,7 @@ namespace Graphene {
 		public void to_matrix (out unowned Graphene.Matrix m);
 		public void to_vec4 (out unowned Graphene.Vec4 res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_ray_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_ray_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_ray_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_ray_get_type ()")]
 	[Compact]
 	public class Ray {
 		[CCode (cname = "graphene_ray_alloc", has_construct_function = false)]
@@ -273,7 +273,7 @@ namespace Graphene {
 		public unowned Graphene.Ray init_from_ray (Graphene.Ray src);
 		public unowned Graphene.Ray init_from_vec3 (Graphene.Vec3? origin, Graphene.Vec3? direction);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_rect_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_rect_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_rect_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_rect_get_type ()")]
 	[Compact]
 	public class Rect {
 		public weak Graphene.Point origin;
@@ -309,7 +309,7 @@ namespace Graphene {
 		public unowned Graphene.Rect round_to_pixel ();
 		public void union (Graphene.Rect b, out unowned Graphene.Rect res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_size_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_size_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_size_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_size_get_type ()")]
 	[Compact]
 	public class Size {
 		public float height;
@@ -324,7 +324,7 @@ namespace Graphene {
 		public void scale (float factor, out unowned Graphene.Size res);
 		public static unowned Graphene.Size zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_sphere_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_sphere_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_sphere_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_sphere_get_type ()")]
 	[Compact]
 	public class Sphere {
 		[CCode (cname = "graphene_sphere_alloc", has_construct_function = false)]
@@ -342,7 +342,7 @@ namespace Graphene {
 		public bool is_empty ();
 		public void translate (Graphene.Point3D point, out unowned Graphene.Sphere res);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_triangle_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_triangle_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_triangle_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_triangle_get_type ()")]
 	[Compact]
 	public class Triangle {
 		[CCode (cname = "graphene_triangle_alloc", has_construct_function = false)]
@@ -361,7 +361,7 @@ namespace Graphene {
 		public unowned Graphene.Triangle init_from_point3d (Graphene.Point3D? a, Graphene.Point3D? b, Graphene.Point3D? c);
 		public unowned Graphene.Triangle init_from_vec3 (Graphene.Vec3? a, Graphene.Vec3? b, Graphene.Vec3? c);
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_vec2_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec2_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec2_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec2_get_type ()")]
 	[Compact]
 	public class Vec2 {
 		public void add (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
@@ -391,7 +391,7 @@ namespace Graphene {
 		public static unowned Graphene.Vec2 y_axis ();
 		public static unowned Graphene.Vec2 zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_vec3_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec3_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec3_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec3_get_type ()")]
 	[Compact]
 	public class Vec3 {
 		public void add (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
@@ -434,7 +434,7 @@ namespace Graphene {
 		public static unowned Graphene.Vec3 z_axis ();
 		public static unowned Graphene.Vec3 zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_vec4_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec4_get_type ()")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec4_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec4_get_type ()")]
 	[Compact]
 	public class Vec4 {
 		public void add (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
@@ -472,7 +472,7 @@ namespace Graphene {
 		public static unowned Graphene.Vec4 z_axis ();
 		public static unowned Graphene.Vec4 zero ();
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "graphene_euler_order_t", cprefix = "GRAPHENE_EULER_ORDER_", has_type_id = false)]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_euler_order_t", cprefix = "GRAPHENE_EULER_ORDER_", has_type_id = false)]
 	public enum EulerOrder {
 		DEFAULT,
 		XYZ,
@@ -482,14 +482,14 @@ namespace Graphene {
 		YXZ,
 		ZYX
 	}
-	[CCode (cheader_filename = "graphene-object.h", cname = "GRAPHENE_PI")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "GRAPHENE_PI")]
 	public const double PI;
-	[CCode (cheader_filename = "graphene-object.h", cname = "GRAPHENE_PI_2")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "GRAPHENE_PI_2")]
 	public const double PI_2;
-	[CCode (cheader_filename = "graphene-object.h", cname = "GRAPHENE_VEC2_LEN")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "GRAPHENE_VEC2_LEN")]
 	public const int VEC2_LEN;
-	[CCode (cheader_filename = "graphene-object.h", cname = "GRAPHENE_VEC3_LEN")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "GRAPHENE_VEC3_LEN")]
 	public const int VEC3_LEN;
-	[CCode (cheader_filename = "graphene-object.h", cname = "GRAPHENE_VEC4_LEN")]
+	[CCode (cheader_filename = "graphene-gobject.h", cname = "GRAPHENE_VEC4_LEN")]
 	public const int VEC4_LEN;
 }
