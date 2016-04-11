@@ -1,6 +1,7 @@
 using Gtk;
 using GL;
 using Gdk;
+using Graphene;
 
 string readstream(InputStream data) throws GLib.IOError {
 	var dis = new DataInputStream(data);
@@ -49,6 +50,9 @@ class AppWindow : Gtk.Window {
 
 	private GLuint programID = -1;
 
+	private Matrix MVP;
+	private GLint MatrixID;
+
 	private void init_render() {
 		try {
 			glewExperimental = GL_TRUE; 
@@ -70,6 +74,21 @@ class AppWindow : Gtk.Window {
 			glBufferData(GL_ARRAY_BUFFER, sizeof__g_vertex_buffer_data, (GLvoid[]?)g_vertex_buffer_data, GL_STATIC_DRAW);
 
 			programID = load_shaders("/com/astro73/Spacers/vertex.glsl", "/com/astro73/Spacers/fragment.glsl");
+
+			// Get a handle for our "MVP" uniform
+			MatrixID = glGetUniformLocation(programID, "MVP");
+			// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+			Matrix Projection = Matrix.with_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f); // Need my VAPI for this
+	
+			Matrix View = Matrix.with_look_at(
+				Vec3.with_coords(4,3,3), // Camera is at (4,3,3), in World Space
+				Vec3.with_coords(0,0,0), // and looks at the origin
+				Vec3.with_coords(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+			);
+
+			Matrix Model = Matrix.with_identity();
+
+			MVP = Projection.chain_multi(View).chain_multi(Model);
 
 			stdout.printf("Finished init\n");
 		} finally {
@@ -151,6 +170,12 @@ class AppWindow : Gtk.Window {
 		if (programID == -1) return false;
 
 		glUseProgram(programID);
+
+		// Send our transformation to the currently bound shader, 
+		// in the "MVP" uniform
+		GLfloat[4*4] m;
+		MVP.to_float(out m);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, m);
 
 		// 1st attribute buffer : vertices
 		glEnableVertexAttribArray(0);

@@ -77,6 +77,22 @@ namespace Graphene {
 	public class Matrix {
 		[CCode (cname = "graphene_matrix_alloc", has_construct_function = false)]
 		public Matrix.alloc ();
+		// Can't make this a constructor, valac won't let us chain constructors sideways
+		public static Graphene.Matrix with_perspective(float fovy, float aspect, float z_near, float z_far) {
+			var self = new Matrix.alloc();
+			self.init_perspective(fovy, aspect, z_near, z_far);
+			return self;
+		}
+		public static Graphene.Matrix with_look_at(Graphene.Vec3 eye, Graphene.Vec3 center, Graphene.Vec3 up) {
+			var self = new Matrix.alloc();
+			self.init_look_at(eye, center, up);
+			return self;
+		}
+		public static Graphene.Matrix with_identity() {
+			var self = new Matrix.alloc();
+			self.init_identity();
+			return self;
+		}		
 		public float determinant ();
 		public void free ();
 		public void get_row (uint index_, out unowned Graphene.Vec4 res);
@@ -104,6 +120,11 @@ namespace Graphene {
 		public bool is_identity ();
 		public bool is_singular ();
 		public void multiply (Graphene.Matrix b, out unowned Graphene.Matrix res);
+		public Graphene.Matrix chain_multi(Graphene.Matrix b) {
+			Graphene.Matrix res = new Matrix.alloc();
+			this.multiply(b, out res);
+			return res;
+		}
 		public void normalize (out unowned Graphene.Matrix res);
 		public void perspective (float depth, out unowned Graphene.Matrix res);
 		public void print ();
@@ -284,7 +305,7 @@ namespace Graphene {
 		public unowned Graphene.Rect offset (float d_x, float d_y);
 		public void offset_r (float d_x, float d_y, out unowned Graphene.Rect res);
 		public void round (out unowned Graphene.Rect res);
-		[Deprecated (since = "1.4")]
+		[Version (deprecated = true, deprecated_since = "1.4")]
 		public unowned Graphene.Rect round_to_pixel ();
 		public void union (Graphene.Rect b, out unowned Graphene.Rect res);
 	}
@@ -376,6 +397,11 @@ namespace Graphene {
 		public void add (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
 		[CCode (cname = "graphene_vec3_alloc", has_construct_function = false)]
 		public Vec3.alloc ();
+		public static Graphene.Vec3 with_coords(float x, float y, float z) {
+			var self = new Vec3.alloc();
+			self.init(x, y, z);
+			return self;
+		}
 		public void cross (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
 		public void divide (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
 		public float dot (Graphene.Vec3 b);
