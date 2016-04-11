@@ -11,18 +11,18 @@ namespace Graphene {
 		public bool contains_point (Graphene.Point3D point);
 		public static unowned Graphene.Box empty ();
 		public bool equal (Graphene.Box b);
-		public void expand (Graphene.Point3D point, out unowned Graphene.Box res);
-		public void expand_scalar (float scalar, out unowned Graphene.Box res);
-		public void expand_vec3 (Graphene.Vec3 vec, out unowned Graphene.Box res);
+		public void expand (Graphene.Point3D point, /*out*/ Graphene.Box res);
+		public void expand_scalar (float scalar, /*out*/ Graphene.Box res);
+		public void expand_vec3 (Graphene.Vec3 vec, /*out*/ Graphene.Box res);
 		public void free ();
-		public void get_bounding_sphere (out unowned Graphene.Sphere sphere);
-		public void get_center (out unowned Graphene.Point3D center);
+		public void get_bounding_sphere (/*out*/ Graphene.Sphere sphere);
+		public void get_center (/*out*/ Graphene.Point3D center);
 		public float get_depth ();
 		public float get_height ();
-		public void get_max (out unowned Graphene.Point3D max);
-		public void get_min (out unowned Graphene.Point3D min);
-		public void get_size (out unowned Graphene.Vec3 size);
-		public void get_vertices ([CCode (array_length = false)] out unowned Graphene.Vec3[] vertices);
+		public void get_max (/*out*/ Graphene.Point3D max);
+		public void get_min (/*out*/ Graphene.Point3D min);
+		public void get_size (/*out*/ Graphene.Vec3 size);
+		public void get_vertices ([CCode (array_length = false)] /*out*/ Graphene.Vec3[] vertices);
 		public float get_width ();
 		public static unowned Graphene.Box infinite ();
 		public unowned Graphene.Box init (Graphene.Point3D? min, Graphene.Point3D? max);
@@ -30,11 +30,11 @@ namespace Graphene {
 		public unowned Graphene.Box init_from_points ([CCode (array_length_cname = "n_points", array_length_pos = 0.5, array_length_type = "guint")] Graphene.Point3D[] points);
 		public unowned Graphene.Box init_from_vec3 (Graphene.Vec3? min, Graphene.Vec3? max);
 		public unowned Graphene.Box init_from_vectors ([CCode (array_length_cname = "n_vectors", array_length_pos = 0.5, array_length_type = "guint")] Graphene.Vec3[] vectors);
-		public bool intersection (Graphene.Box b, out unowned Graphene.Box res);
+		public bool intersection (Graphene.Box b, /*out*/ Graphene.Box res);
 		public static unowned Graphene.Box minus_one ();
 		public static unowned Graphene.Box one ();
 		public static unowned Graphene.Box one_minus_one ();
-		public void union (Graphene.Box b, out unowned Graphene.Box res);
+		public void union (Graphene.Box b, /*out*/ Graphene.Box res);
 		public static unowned Graphene.Box zero ();
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_euler_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_euler_get_type ()")]
@@ -54,9 +54,9 @@ namespace Graphene {
 		public unowned Graphene.Euler init_from_quaternion (Graphene.Quaternion? q, Graphene.EulerOrder order);
 		public unowned Graphene.Euler init_from_vec3 (Graphene.Vec3? v, Graphene.EulerOrder order);
 		public unowned Graphene.Euler init_with_order (float x, float y, float z, Graphene.EulerOrder order);
-		public void reorder (Graphene.EulerOrder order, out unowned Graphene.Euler res);
-		public void to_matrix (out unowned Graphene.Matrix res);
-		public void to_vec3 (out unowned Graphene.Vec3 res);
+		public void reorder (Graphene.EulerOrder order, /*out*/ Graphene.Euler res);
+		public void to_matrix (/*out*/ Graphene.Matrix res);
+		public void to_vec3 (/*out*/ Graphene.Vec3 res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_frustum_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_frustum_get_type ()")]
 	[Compact]
@@ -65,7 +65,7 @@ namespace Graphene {
 		public Frustum.alloc ();
 		public bool contains_point (Graphene.Point3D point);
 		public void free ();
-		public void get_planes ([CCode (array_length = false)] out unowned Graphene.Plane[] planes);
+		public void get_planes ([CCode (array_length = false)] /*out*/ Graphene.Plane[] planes);
 		public unowned Graphene.Frustum init (Graphene.Plane p0, Graphene.Plane p1, Graphene.Plane p2, Graphene.Plane p3, Graphene.Plane p4, Graphene.Plane p5);
 		public unowned Graphene.Frustum init_from_frustum (Graphene.Frustum src);
 		public unowned Graphene.Frustum init_from_matrix (Graphene.Matrix matrix);
@@ -95,7 +95,7 @@ namespace Graphene {
 		}		
 		public float determinant ();
 		public void free ();
-		public void get_row (uint index_, out unowned Graphene.Vec4 res);
+		public void get_row (uint index_, /*out*/ Graphene.Vec4 res);
 		public float get_value (uint row, uint col);
 		public float get_x_scale ();
 		public float get_y_scale ();
@@ -113,24 +113,24 @@ namespace Graphene {
 		public unowned Graphene.Matrix init_scale (float x, float y, float z);
 		public unowned Graphene.Matrix init_skew (float x_skew, float y_skew);
 		public unowned Graphene.Matrix init_translate (Graphene.Point3D p);
-		public void interpolate (Graphene.Matrix b, double factor, out unowned Graphene.Matrix res);
-		public void inverse (out unowned Graphene.Matrix res);
+		public void interpolate (Graphene.Matrix b, double factor, /*out*/ Graphene.Matrix res);
+		public void inverse (/*out*/ Graphene.Matrix res);
 		public bool is_2d ();
 		public bool is_backface_visible ();
 		public bool is_identity ();
 		public bool is_singular ();
-		public void multiply (Graphene.Matrix b, out unowned Graphene.Matrix res);
+		public void multiply (Graphene.Matrix b, Graphene.Matrix res);
 		public Graphene.Matrix chain_multi(Graphene.Matrix b) {
 			Graphene.Matrix res = new Matrix.alloc();
-			this.multiply(b, out res);
+			this.multiply(b, res);
 			return res;
 		}
-		public void normalize (out unowned Graphene.Matrix res);
-		public void perspective (float depth, out unowned Graphene.Matrix res);
+		public void normalize (/*out*/ Graphene.Matrix res);
+		public void perspective (float depth, /*out*/ Graphene.Matrix res);
 		public void print ();
-		public void project_point (Graphene.Point p, out unowned Graphene.Point res);
-		public void project_rect (Graphene.Rect r, out unowned Graphene.Quad res);
-		public void project_rect_bounds (Graphene.Rect r, out unowned Graphene.Rect res);
+		public void project_point (Graphene.Point p, /*out*/ Graphene.Point res);
+		public void project_rect (Graphene.Rect r, /*out*/ Graphene.Quad res);
+		public void project_rect_bounds (Graphene.Rect r, /*out*/ Graphene.Rect res);
 		public void rotate (float angle, Graphene.Vec3 axis);
 		public void rotate_euler (Graphene.Euler e);
 		public void rotate_quaternion (Graphene.Quaternion q);
@@ -142,21 +142,21 @@ namespace Graphene {
 		public void skew_xz (float factor);
 		public void skew_yz (float factor);
 		public bool to_2d (out double xx, out double yx, out double xy, out double yy, out double x_0, out double y_0);
-		public void to_float ([CCode (array_length = false)] out unowned float[] v);
-		public void transform_bounds (Graphene.Rect r, out unowned Graphene.Rect res);
-		public void transform_box (Graphene.Box b, out unowned Graphene.Box res);
-		public void transform_point (Graphene.Point p, out unowned Graphene.Point res);
-		public void transform_point3d (Graphene.Point3D p, out unowned Graphene.Point3D res);
-		public void transform_ray (Graphene.Ray r, out unowned Graphene.Ray res);
-		public void transform_rect (Graphene.Rect r, out unowned Graphene.Quad res);
-		public void transform_sphere (Graphene.Sphere s, out unowned Graphene.Sphere res);
-		public void transform_vec3 (Graphene.Vec3 v, out unowned Graphene.Vec3 res);
-		public void transform_vec4 (Graphene.Vec4 v, out unowned Graphene.Vec4 res);
+		public void to_float ([CCode (array_length = false)] /*out*/ float[] v);
+		public void transform_bounds (Graphene.Rect r, /*out*/ Graphene.Rect res);
+		public void transform_box (Graphene.Box b, /*out*/ Graphene.Box res);
+		public void transform_point (Graphene.Point p, /*out*/ Graphene.Point res);
+		public void transform_point3d (Graphene.Point3D p, /*out*/ Graphene.Point3D res);
+		public void transform_ray (Graphene.Ray r, /*out*/ Graphene.Ray res);
+		public void transform_rect (Graphene.Rect r, /*out*/ Graphene.Quad res);
+		public void transform_sphere (Graphene.Sphere s, /*out*/ Graphene.Sphere res);
+		public void transform_vec3 (Graphene.Vec3 v, /*out*/ Graphene.Vec3 res);
+		public void transform_vec4 (Graphene.Vec4 v, /*out*/ Graphene.Vec4 res);
 		public void translate (Graphene.Point3D pos);
-		public void transpose (out unowned Graphene.Matrix res);
-		public void unproject_point3d (Graphene.Matrix modelview, Graphene.Point3D point, out unowned Graphene.Point3D res);
-		public void untransform_bounds (Graphene.Rect r, Graphene.Rect bounds, out unowned Graphene.Rect res);
-		public bool untransform_point (Graphene.Point p, Graphene.Rect bounds, out unowned Graphene.Point res);
+		public void transpose (/*out*/ Graphene.Matrix res);
+		public void unproject_point3d (Graphene.Matrix modelview, Graphene.Point3D point, /*out*/ Graphene.Point3D res);
+		public void untransform_bounds (Graphene.Rect r, Graphene.Rect bounds, /*out*/ Graphene.Rect res);
+		public bool untransform_point (Graphene.Point p, Graphene.Rect bounds, /*out*/ Graphene.Point res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_plane_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_plane_get_type ()")]
 	[Compact]
@@ -167,14 +167,14 @@ namespace Graphene {
 		public bool equal (Graphene.Plane p2);
 		public void free ();
 		public float get_constant ();
-		public void get_normal (out unowned Graphene.Vec3 normal);
+		public void get_normal (/*out*/ Graphene.Vec3 normal);
 		public unowned Graphene.Plane init (Graphene.Vec3? normal, float constant);
 		public unowned Graphene.Plane init_from_plane (Graphene.Plane src);
 		public unowned Graphene.Plane init_from_point (Graphene.Vec3 normal, Graphene.Point3D point);
 		public unowned Graphene.Plane init_from_points (Graphene.Point3D a, Graphene.Point3D b, Graphene.Point3D c);
 		public unowned Graphene.Plane init_from_vec4 (Graphene.Vec4 src);
-		public void negate (out unowned Graphene.Plane res);
-		public void normalize (out unowned Graphene.Plane res);
+		public void negate (/*out*/ Graphene.Plane res);
+		public void normalize (/*out*/ Graphene.Plane res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_point_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_point_get_type ()")]
 	[Compact]
@@ -189,9 +189,9 @@ namespace Graphene {
 		public unowned Graphene.Point init (float x, float y);
 		public unowned Graphene.Point init_from_point (Graphene.Point src);
 		public unowned Graphene.Point init_from_vec2 (Graphene.Vec2 src);
-		public void interpolate (Graphene.Point b, double factor, out unowned Graphene.Point res);
+		public void interpolate (Graphene.Point b, double factor, /*out*/ Graphene.Point res);
 		public bool near (Graphene.Point b, float epsilon);
-		public void to_vec2 (out unowned Graphene.Vec2 v);
+		public void to_vec2 (/*out*/ Graphene.Vec2 v);
 		public static unowned Graphene.Point zero ();
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_point3d_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", lower_case_csuffix = "point3d", type_id = "graphene_point3d_get_type ()")]
@@ -202,21 +202,21 @@ namespace Graphene {
 		public float z;
 		[CCode (cname = "graphene_point3d_alloc", has_construct_function = false)]
 		public Point3D.alloc ();
-		public void cross (Graphene.Point3D b, out unowned Graphene.Point3D res);
-		public float distance (Graphene.Point3D b, out unowned Graphene.Vec3 delta);
+		public void cross (Graphene.Point3D b, /*out*/ Graphene.Point3D res);
+		public float distance (Graphene.Point3D b, /*out*/ Graphene.Vec3 delta);
 		public float dot (Graphene.Point3D b);
 		public bool equal (Graphene.Point3D b);
 		public void free ();
 		public unowned Graphene.Point3D init (float x, float y, float z);
 		public unowned Graphene.Point3D init_from_point (Graphene.Point3D src);
 		public unowned Graphene.Point3D init_from_vec3 (Graphene.Vec3 v);
-		public void interpolate (Graphene.Point3D b, double factor, out unowned Graphene.Point3D res);
+		public void interpolate (Graphene.Point3D b, double factor, /*out*/ Graphene.Point3D res);
 		public float length ();
 		public bool near (Graphene.Point3D b, float epsilon);
-		public void normalize (out unowned Graphene.Point3D res);
-		public void normalize_viewport (Graphene.Rect viewport, float z_near, float z_far, out unowned Graphene.Point3D res);
-		public void scale (float factor, out unowned Graphene.Point3D res);
-		public void to_vec3 (out unowned Graphene.Vec3 v);
+		public void normalize (/*out*/ Graphene.Point3D res);
+		public void normalize_viewport (Graphene.Rect viewport, float z_near, float z_far, /*out*/ Graphene.Point3D res);
+		public void scale (float factor, /*out*/ Graphene.Point3D res);
+		public void to_vec3 (/*out*/ Graphene.Vec3 v);
 		public static unowned Graphene.Point3D zero ();
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_quad_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_quad_get_type ()")]
@@ -224,7 +224,7 @@ namespace Graphene {
 	public class Quad {
 		[CCode (cname = "graphene_quad_alloc", has_construct_function = false)]
 		public Quad.alloc ();
-		public void bounds (out unowned Graphene.Rect r);
+		public void bounds (/*out*/ Graphene.Rect r);
 		public bool contains (Graphene.Point p);
 		public void free ();
 		public unowned Graphene.Point get_point (uint index_);
@@ -248,13 +248,13 @@ namespace Graphene {
 		public unowned Graphene.Quaternion init_from_quaternion (Graphene.Quaternion src);
 		public unowned Graphene.Quaternion init_from_vec4 (Graphene.Vec4 src);
 		public unowned Graphene.Quaternion init_identity ();
-		public void invert (out unowned Graphene.Quaternion res);
-		public void normalize (out unowned Graphene.Quaternion res);
-		public void slerp (Graphene.Quaternion b, float factor, out unowned Graphene.Quaternion res);
-		public void to_angle_vec3 (out float angle, out unowned Graphene.Vec3 axis);
+		public void invert (/*out*/ Graphene.Quaternion res);
+		public void normalize (/*out*/ Graphene.Quaternion res);
+		public void slerp (Graphene.Quaternion b, float factor, /*out*/ Graphene.Quaternion res);
+		public void to_angle_vec3 (out float angle, /*out*/ Graphene.Vec3 axis);
 		public void to_angles (out float deg_x, out float deg_y, out float deg_z);
-		public void to_matrix (out unowned Graphene.Matrix m);
-		public void to_vec4 (out unowned Graphene.Vec4 res);
+		public void to_matrix (/*out*/ Graphene.Matrix m);
+		public void to_vec4 (/*out*/ Graphene.Vec4 res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_ray_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_ray_get_type ()")]
 	[Compact]
@@ -263,12 +263,12 @@ namespace Graphene {
 		public Ray.alloc ();
 		public bool equal (Graphene.Ray b);
 		public void free ();
-		public void get_closest_point_to_point (Graphene.Point3D p, out unowned Graphene.Point3D res);
-		public void get_direction (out unowned Graphene.Vec3 direction);
+		public void get_closest_point_to_point (Graphene.Point3D p, /*out*/ Graphene.Point3D res);
+		public void get_direction (/*out*/ Graphene.Vec3 direction);
 		public float get_distance_to_plane (Graphene.Plane p);
 		public float get_distance_to_point (Graphene.Point3D p);
-		public void get_origin (out unowned Graphene.Point3D origin);
-		public void get_position_at (float t, out unowned Graphene.Point3D position);
+		public void get_origin (/*out*/ Graphene.Point3D origin);
+		public void get_position_at (float t, /*out*/ Graphene.Point3D position);
 		public unowned Graphene.Ray init (Graphene.Point3D? origin, Graphene.Vec3? direction);
 		public unowned Graphene.Ray init_from_ray (Graphene.Ray src);
 		public unowned Graphene.Ray init_from_vec3 (Graphene.Vec3? origin, Graphene.Vec3? direction);
@@ -282,32 +282,32 @@ namespace Graphene {
 		public bool contains_point (Graphene.Point p);
 		public bool contains_rect (Graphene.Rect b);
 		public bool equal (Graphene.Rect b);
-		public void expand (Graphene.Point p, out unowned Graphene.Rect res);
+		public void expand (Graphene.Point p, /*out*/ Graphene.Rect res);
 		public void free ();
-		public void get_bottom_left (out unowned Graphene.Point p);
-		public void get_bottom_right (out unowned Graphene.Point p);
-		public void get_center (out unowned Graphene.Point p);
+		public void get_bottom_left (/*out*/ Graphene.Point p);
+		public void get_bottom_right (/*out*/ Graphene.Point p);
+		public void get_center (/*out*/ Graphene.Point p);
 		public float get_height ();
-		public void get_top_left (out unowned Graphene.Point p);
-		public void get_top_right (out unowned Graphene.Point p);
-		public void get_vertices ([CCode (array_length = false)] out unowned Graphene.Vec2[] vertices);
+		public void get_top_left (/*out*/ Graphene.Point p);
+		public void get_top_right (/*out*/ Graphene.Point p);
+		public void get_vertices ([CCode (array_length = false)] /*out*/ Graphene.Vec2[] vertices);
 		public float get_width ();
 		public float get_x ();
 		public float get_y ();
 		public unowned Graphene.Rect init (float x, float y, float width, float height);
 		public unowned Graphene.Rect init_from_rect (Graphene.Rect src);
 		public unowned Graphene.Rect inset (float d_x, float d_y);
-		public void inset_r (float d_x, float d_y, out unowned Graphene.Rect res);
-		public void interpolate (Graphene.Rect b, double factor, out unowned Graphene.Rect res);
-		public bool intersection (Graphene.Rect b, out unowned Graphene.Rect res);
+		public void inset_r (float d_x, float d_y, /*out*/ Graphene.Rect res);
+		public void interpolate (Graphene.Rect b, double factor, /*out*/ Graphene.Rect res);
+		public bool intersection (Graphene.Rect b, /*out*/ Graphene.Rect res);
 		public unowned Graphene.Rect normalize ();
-		public void normalize_r (out unowned Graphene.Rect res);
+		public void normalize_r (/*out*/ Graphene.Rect res);
 		public unowned Graphene.Rect offset (float d_x, float d_y);
-		public void offset_r (float d_x, float d_y, out unowned Graphene.Rect res);
-		public void round (out unowned Graphene.Rect res);
+		public void offset_r (float d_x, float d_y, /*out*/ Graphene.Rect res);
+		public void round (/*out*/ Graphene.Rect res);
 		[Version (deprecated = true, deprecated_since = "1.4")]
 		public unowned Graphene.Rect round_to_pixel ();
-		public void union (Graphene.Rect b, out unowned Graphene.Rect res);
+		public void union (Graphene.Rect b, /*out*/ Graphene.Rect res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_size_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_size_get_type ()")]
 	[Compact]
@@ -320,8 +320,8 @@ namespace Graphene {
 		public void free ();
 		public unowned Graphene.Size init (float width, float height);
 		public unowned Graphene.Size init_from_size (Graphene.Size src);
-		public void interpolate (Graphene.Size b, double factor, out unowned Graphene.Size res);
-		public void scale (float factor, out unowned Graphene.Size res);
+		public void interpolate (Graphene.Size b, double factor, /*out*/ Graphene.Size res);
+		public void scale (float factor, /*out*/ Graphene.Size res);
 		public static unowned Graphene.Size zero ();
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_sphere_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_sphere_get_type ()")]
@@ -333,14 +333,14 @@ namespace Graphene {
 		public float distance (Graphene.Point3D point);
 		public bool equal (Graphene.Sphere b);
 		public void free ();
-		public void get_bounding_box (out unowned Graphene.Box box);
-		public void get_center (out unowned Graphene.Point3D center);
+		public void get_bounding_box (/*out*/ Graphene.Box box);
+		public void get_center (/*out*/ Graphene.Point3D center);
 		public float get_radius ();
 		public unowned Graphene.Sphere init (Graphene.Point3D? center, float radius);
 		public unowned Graphene.Sphere init_from_points ([CCode (array_length_cname = "n_points", array_length_pos = 0.5, array_length_type = "guint")] Graphene.Point3D[] points, Graphene.Point3D? center);
 		public unowned Graphene.Sphere init_from_vectors ([CCode (array_length_cname = "n_vectors", array_length_pos = 0.5, array_length_type = "guint")] Graphene.Vec3[] vectors, Graphene.Point3D? center);
 		public bool is_empty ();
-		public void translate (Graphene.Point3D point, out unowned Graphene.Sphere res);
+		public void translate (Graphene.Point3D point, /*out*/ Graphene.Sphere res);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_triangle_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_triangle_get_type ()")]
 	[Compact]
@@ -351,23 +351,23 @@ namespace Graphene {
 		public bool equal (Graphene.Triangle b);
 		public void free ();
 		public float get_area ();
-		public bool get_barycoords (Graphene.Point3D? p, out unowned Graphene.Vec2 res);
-		public void get_bounding_box (out unowned Graphene.Box res);
-		public void get_midpoint (out unowned Graphene.Point3D res);
-		public void get_normal (out unowned Graphene.Vec3 res);
-		public void get_plane (out unowned Graphene.Plane res);
-		public void get_points (out unowned Graphene.Point3D a, out unowned Graphene.Point3D b, out unowned Graphene.Point3D c);
-		public void get_vertices (out unowned Graphene.Vec3 a, out unowned Graphene.Vec3 b, out unowned Graphene.Vec3 c);
+		public bool get_barycoords (Graphene.Point3D? p, /*out*/ Graphene.Vec2 res);
+		public void get_bounding_box (/*out*/ Graphene.Box res);
+		public void get_midpoint (/*out*/ Graphene.Point3D res);
+		public void get_normal (/*out*/ Graphene.Vec3 res);
+		public void get_plane (/*out*/ Graphene.Plane res);
+		public void get_points (/*out*/ Graphene.Point3D a, /*out*/ Graphene.Point3D b, /*out*/ Graphene.Point3D c);
+		public void get_vertices (/*out*/ Graphene.Vec3 a, /*out*/ Graphene.Vec3 b, /*out*/ Graphene.Vec3 c);
 		public unowned Graphene.Triangle init_from_point3d (Graphene.Point3D? a, Graphene.Point3D? b, Graphene.Point3D? c);
 		public unowned Graphene.Triangle init_from_vec3 (Graphene.Vec3? a, Graphene.Vec3? b, Graphene.Vec3? c);
 	}
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec2_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec2_get_type ()")]
 	[Compact]
 	public class Vec2 {
-		public void add (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
+		public void add (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
 		[CCode (cname = "graphene_vec2_alloc", has_construct_function = false)]
 		public Vec2.alloc ();
-		public void divide (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
+		public void divide (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
 		public float dot (Graphene.Vec2 b);
 		public bool equal (Graphene.Vec2 v2);
 		public void free ();
@@ -377,16 +377,16 @@ namespace Graphene {
 		public unowned Graphene.Vec2 init_from_float ([CCode (array_length = false)] float[] src);
 		public unowned Graphene.Vec2 init_from_vec2 (Graphene.Vec2 src);
 		public float length ();
-		public void max (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
-		public void min (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
-		public void multiply (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
+		public void max (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
+		public void min (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
+		public void multiply (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
 		public bool near (Graphene.Vec2 v2, float epsilon);
-		public void negate (out unowned Graphene.Vec2 res);
-		public void normalize (out unowned Graphene.Vec2 res);
+		public void negate (/*out*/ Graphene.Vec2 res);
+		public void normalize (/*out*/ Graphene.Vec2 res);
 		public static unowned Graphene.Vec2 one ();
-		public void scale (float factor, out unowned Graphene.Vec2 res);
-		public void subtract (Graphene.Vec2 b, out unowned Graphene.Vec2 res);
-		public void to_float ([CCode (array_length = false)] out unowned float[] dest);
+		public void scale (float factor, /*out*/ Graphene.Vec2 res);
+		public void subtract (Graphene.Vec2 b, /*out*/ Graphene.Vec2 res);
+		public void to_float ([CCode (array_length = false)] /*out*/ float[] dest);
 		public static unowned Graphene.Vec2 x_axis ();
 		public static unowned Graphene.Vec2 y_axis ();
 		public static unowned Graphene.Vec2 zero ();
@@ -394,7 +394,7 @@ namespace Graphene {
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec3_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec3_get_type ()")]
 	[Compact]
 	public class Vec3 {
-		public void add (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
+		public void add (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
 		[CCode (cname = "graphene_vec3_alloc", has_construct_function = false)]
 		public Vec3.alloc ();
 		public static Graphene.Vec3 with_coords(float x, float y, float z) {
@@ -402,33 +402,33 @@ namespace Graphene {
 			self.init(x, y, z);
 			return self;
 		}
-		public void cross (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
-		public void divide (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
+		public void cross (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
+		public void divide (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
 		public float dot (Graphene.Vec3 b);
 		public bool equal (Graphene.Vec3 v2);
 		public void free ();
 		public float get_x ();
-		public void get_xy (out unowned Graphene.Vec2 res);
-		public void get_xy0 (out unowned Graphene.Vec3 res);
-		public void get_xyz0 (out unowned Graphene.Vec4 res);
-		public void get_xyz1 (out unowned Graphene.Vec4 res);
-		public void get_xyzw (float w, out unowned Graphene.Vec4 res);
+		public void get_xy (/*out*/ Graphene.Vec2 res);
+		public void get_xy0 (/*out*/ Graphene.Vec3 res);
+		public void get_xyz0 (/*out*/ Graphene.Vec4 res);
+		public void get_xyz1 (/*out*/ Graphene.Vec4 res);
+		public void get_xyzw (float w, /*out*/ Graphene.Vec4 res);
 		public float get_y ();
 		public float get_z ();
 		public unowned Graphene.Vec3 init (float x, float y, float z);
 		public unowned Graphene.Vec3 init_from_float ([CCode (array_length = false)] float[] src);
 		public unowned Graphene.Vec3 init_from_vec3 (Graphene.Vec3 src);
 		public float length ();
-		public void max (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
-		public void min (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
-		public void multiply (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
+		public void max (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
+		public void min (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
+		public void multiply (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
 		public bool near (Graphene.Vec3 v2, float epsilon);
-		public void negate (out unowned Graphene.Vec3 res);
-		public void normalize (out unowned Graphene.Vec3 res);
+		public void negate (/*out*/ Graphene.Vec3 res);
+		public void normalize (/*out*/ Graphene.Vec3 res);
 		public static unowned Graphene.Vec3 one ();
-		public void scale (float factor, out unowned Graphene.Vec3 res);
-		public void subtract (Graphene.Vec3 b, out unowned Graphene.Vec3 res);
-		public void to_float ([CCode (array_length = false)] out unowned float[] dest);
+		public void scale (float factor, /*out*/ Graphene.Vec3 res);
+		public void subtract (Graphene.Vec3 b, /*out*/ Graphene.Vec3 res);
+		public void to_float ([CCode (array_length = false)] /*out*/ float[] dest);
 		public static unowned Graphene.Vec3 x_axis ();
 		public static unowned Graphene.Vec3 y_axis ();
 		public static unowned Graphene.Vec3 z_axis ();
@@ -437,17 +437,17 @@ namespace Graphene {
 	[CCode (cheader_filename = "graphene-gobject.h", cname = "graphene_vec4_t", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "graphene_vec4_get_type ()")]
 	[Compact]
 	public class Vec4 {
-		public void add (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
+		public void add (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
 		[CCode (cname = "graphene_vec4_alloc", has_construct_function = false)]
 		public Vec4.alloc ();
-		public void divide (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
+		public void divide (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
 		public float dot (Graphene.Vec4 b);
 		public bool equal (Graphene.Vec4 v2);
 		public void free ();
 		public float get_w ();
 		public float get_x ();
-		public void get_xy (out unowned Graphene.Vec2 res);
-		public void get_xyz (out unowned Graphene.Vec3 res);
+		public void get_xy (/*out*/ Graphene.Vec2 res);
+		public void get_xyz (/*out*/ Graphene.Vec3 res);
 		public float get_y ();
 		public float get_z ();
 		public unowned Graphene.Vec4 init (float x, float y, float z, float w);
@@ -456,16 +456,16 @@ namespace Graphene {
 		public unowned Graphene.Vec4 init_from_vec3 (Graphene.Vec3 src, float w);
 		public unowned Graphene.Vec4 init_from_vec4 (Graphene.Vec4 src);
 		public float length ();
-		public void max (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
-		public void min (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
-		public void multiply (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
+		public void max (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
+		public void min (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
+		public void multiply (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
 		public bool near (Graphene.Vec4 v2, float epsilon);
-		public void negate (out unowned Graphene.Vec4 res);
-		public void normalize (out unowned Graphene.Vec4 res);
+		public void negate (/*out*/ Graphene.Vec4 res);
+		public void normalize (/*out*/ Graphene.Vec4 res);
 		public static unowned Graphene.Vec4 one ();
-		public void scale (float factor, out unowned Graphene.Vec4 res);
-		public void subtract (Graphene.Vec4 b, out unowned Graphene.Vec4 res);
-		public void to_float ([CCode (array_length = false)] out unowned float[] dest);
+		public void scale (float factor, /*out*/ Graphene.Vec4 res);
+		public void subtract (Graphene.Vec4 b, /*out*/ Graphene.Vec4 res);
+		public void to_float ([CCode (array_length = false)] /*out*/ float[] dest);
 		public static unowned Graphene.Vec4 w_axis ();
 		public static unowned Graphene.Vec4 x_axis ();
 		public static unowned Graphene.Vec4 y_axis ();

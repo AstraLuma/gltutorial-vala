@@ -173,8 +173,8 @@ class AppWindow : Gtk.Window {
 
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform
-		GLfloat m[4*4];
-		MVP.to_float(out m);
+		float m[4*4];
+		MVP.to_float(m);
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, m);
 
 		// 1st attribute buffer : vertices
