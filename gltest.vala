@@ -78,17 +78,19 @@ class AppWindow : Gtk.Window {
 			// Get a handle for our "MVP" uniform
 			MatrixID = glGetUniformLocation(programID, "MVP");
 			// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-			Matrix Projection;
+			var Projection = Matrix();
 			Projection.init_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f); // Need my VAPI for this
 			
-			Vec3 View_location, View_look_at, View_up;
+			var View_location = Vec3();
 			View_location.init(4,3,3); // Camera is at (4,3,3), in World Space
+			var View_look_at = Vec3();
 			View_look_at.init(0,0,0); // and looks at the origin
+			var View_up = Vec3();
 			View_up.init(0,1,0); // Head is up (set to 0,-1,0 to look upside-down)
-			Matrix View;
+			var View = Matrix();
 			View.init_look_at(View_location, View_look_at, View_up);
 
-			Matrix Model;
+			var Model = Matrix();
 			Model.init_identity();
 
 			MVP = Projection.multiply(View).multiply(Model);
