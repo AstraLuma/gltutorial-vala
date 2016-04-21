@@ -78,17 +78,20 @@ class AppWindow : Gtk.Window {
 			// Get a handle for our "MVP" uniform
 			MatrixID = glGetUniformLocation(programID, "MVP");
 			// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-			Matrix Projection = Matrix.with_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f); // Need my VAPI for this
-	
-			Matrix View = Matrix.with_look_at(
-				Vec3.with_coords(4,3,3), // Camera is at (4,3,3), in World Space
-				Vec3.with_coords(0,0,0), // and looks at the origin
-				Vec3.with_coords(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-			);
+			Matrix Projection;
+			Projection.init_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f); // Need my VAPI for this
+			
+			Vec3 View_location, View_look_at, View_up;
+			View_location.init(4,3,3); // Camera is at (4,3,3), in World Space
+			View_look_at.init(0,0,0); // and looks at the origin
+			View_up.init(0,1,0); // Head is up (set to 0,-1,0 to look upside-down)
+			Matrix View;
+			View.init_look_at(View_location, View_look_at, View_up);
 
-			Matrix Model = Matrix.with_identity();
+			Matrix Model;
+			Model.init_identity();
 
-			MVP = Projection.chain_multi(View).chain_multi(Model);
+			MVP = Projection.multiply(View).multiply(Model);
 
 			stdout.printf("Finished init\n");
 		} finally {
@@ -174,7 +177,7 @@ class AppWindow : Gtk.Window {
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform
 		float m[4*4];
-		MVP.to_float(m);
+		MVP.to_float(out m);
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, m);
 
 		// 1st attribute buffer : vertices
