@@ -14,5 +14,5 @@ gltest : *.vala *.vapi shaders.c shaders.h graphene-1.0.vapi
 clean :
 	git clean -xf
 
-graphene-1.0.vapi:
-	wget "https://git.gnome.org/browse/vala/plain/vapi/graphene-1.0.vapi?h=wip/gsk" -O $@
+#graphene-1.0.vapi:
+#	wget "https://git.gnome.org/browse/vala/plain/vapi/graphene-1.0.vapi?h=wip/gsk" -O $@

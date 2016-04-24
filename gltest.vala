@@ -51,7 +51,7 @@ class AppWindow : Gtk.Window {
 	private GLuint programID = -1;
 
 	private Matrix MVP;
-	private GLint MatrixID;
+	private GLint MatrixID = -1;
 
 	private void init_render() {
 		try {
@@ -94,6 +94,8 @@ class AppWindow : Gtk.Window {
 			Model.init_identity();
 
 			MVP = Projection.multiply(View).multiply(Model);
+
+			stdout.printf("XYZ scale: %f %f %f\n", MVP.get_x_scale(), MVP.get_y_scale(), MVP.get_z_scale());
 
 			stdout.printf("Finished init\n");
 		} finally {
@@ -152,7 +154,6 @@ class AppWindow : Gtk.Window {
 		int[] InfoLogLength = {-1};
 		glGetShaderiv(shid, GL_COMPILE_STATUS, Results);
 		glGetShaderiv(shid, GL_INFO_LOG_LENGTH, InfoLogLength);
-		stdout.printf("%i %i\n", Results[0], InfoLogLength[0]);
 		if (Results[0] != GL_TRUE) {
 			string infolog = "";
 			if ( InfoLogLength[0] > 0 ){
