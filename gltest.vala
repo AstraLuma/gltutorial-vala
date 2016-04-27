@@ -144,9 +144,7 @@ class AppWindow : Gtk.Window {
 	private GLuint compile_shader(GL.GLenum type, string resource) throws GLib.Error, GLCompileError {
 		GLuint shid = glCreateShader(type);
 
-		Resource r = Shaders.get_resource();
-
-		string shadersource = readstream(r.open_stream(resource, ResourceLookupFlags.NONE));
+		string shadersource = readstream(resources_open_stream(resource, ResourceLookupFlags.NONE));
 		glShaderSource(shid, 1, {shadersource}, null);
 		glCompileShader(shid);
 
