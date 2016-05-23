@@ -79,7 +79,7 @@ class AppWindow : Gtk.Window {
 			MatrixID = glGetUniformLocation(programID, "MVP");
 			// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 			var Projection = Matrix();
-			Projection.init_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f); // Need my VAPI for this
+			Projection.init_perspective(0.785398f, 4.0f / 3.0f, 0.1f, 100.0f);
 			
 			var View_location = Vec3();
 			View_location.init(4,3,3); // Camera is at (4,3,3), in World Space
