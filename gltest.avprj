@@ -1,0 +1,32 @@
+### AutoVala Project ###
+autovala_version: 19
+project_name: gltest
+*vala_version: 0.32
+
+gresource: shaders shaders.gresource.xml
+
+
+vala_binary: ./gltest
+use_resource: shaders
+vala_vapi: gl.vapi
+vala_vapi: glew.vapi
+vala_vapi: graphene-1.0.vapi
+*vala_check_package: atk
+*vala_check_package: cairo
+*vala_check_package: gdk-3.0
+*vala_check_package: gdk-pixbuf-2.0
+*vala_check_package: gio-2.0
+*vala_check_package: glib-2.0
+*vala_check_package: gobject-2.0
+*vala_check_package: gtk+-3.0
+*vala_check_package: pango
+*vala_check_package: pangocairo
+*vala_check_package: x11
+vala_source: gltest.vala
+
+*po: po
+
+*data: data/local
+
+*doc: doc
+
